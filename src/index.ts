@@ -23,7 +23,7 @@ app.get("/accounts", (req: Request, res: Response) => {
 app.get("/accounts/:id", (req: Request, res: Response) => {
     const id = req.params.id
 
-    const result = accounts.find((account) => account.id === id) 
+    const result = accounts.find((account) => account.id === id)
 
     res.status(200).send(result)
 })
@@ -48,14 +48,14 @@ app.put("/accounts/:id", (req: Request, res: Response) => {
     const newBalance = req.body.balance as number | undefined
     const newType = req.body.type as ACCOUNT_TYPE | undefined
 
-    const account = accounts.find((account) => account.id === id) 
+    const account = accounts.find((account) => account.id === id)
 
     if (account) {
         account.id = newId || account.id
         account.ownerName = newOwnerName || account.ownerName
         account.type = newType || account.type
 
-        account.balance = isNaN(newBalance) ? account.balance : newBalance
+        //account.balance = isNaN(newBalance) ? account.balance : newBalance
     }
 
     res.status(200).send("Atualização realizada com sucesso")

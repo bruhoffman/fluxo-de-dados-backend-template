@@ -1,0 +1,22 @@
+GET http://localhost:3003/ping
+###
+
+GET http://localhost:3003/accounts
+###
+
+GET http://localhost:3003/accounts/5656
+###
+
+PUT http://localhost:3003/accounts/a003
+Content-Type: application/json
+
+{
+    "id": "a003",
+    "ownerName": "outroNome",
+    "balance": 10,
+    "type": "Ouro"
+}
+###
+
+DELETE http://localhost:3003/accounts/a001
+###
