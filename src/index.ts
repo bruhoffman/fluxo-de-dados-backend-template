@@ -21,23 +21,19 @@ app.get("/accounts", (req: Request, res: Response) => {
 })
 
 app.get("/accounts/:id", (req: Request, res: Response) => {
+
     try {
 
-<<<<<<< HEAD
-    const result = accounts.find((account) => account.id === id)
-=======
         const id = req.params.id
-        const result = accounts.find((account) => account.id === id) 
-        
+        const result = accounts.find((account) => account.id === id)
+
         if (!result) {
             throw new Error("Conta não encontrada. Verifique a ID")
         }
->>>>>>> 6fe73b42bb580418897653d68331f7ab596106fd
 
         res.status(200).send(result)
 
-    } catch(error: any){
-        console.log(error)
+    } catch (error: any) {
         res.status(404).send(error.message)
     }
 })
@@ -48,22 +44,24 @@ app.delete("/accounts/:id", (req: Request, res: Response) => {
         const id = req.params.id
         const accountIndex = accounts.findIndex((account) => account.id === id)
 
+
+        // Mudar a estrutura do IF.
         if (id[0] === "a") {
             accounts.splice(accountIndex, 1)
         } else {
-            res.statusCode = 400
+            res.statusCode = 404
             throw new Error("'ID' inválida. Deve iniciar com letra 'a'.")
         }
 
         res.status(200).send("Item deletado com sucesso")
-    }catch(error: any) {
+    } catch (error: any) {
         console.log(error)
         res.send(error.message)
     }
 })
 
 app.put("/accounts/:id", (req: Request, res: Response) => {
-    try{
+    try {
         const id = req.params.id
 
         const newId = req.body.id as string | undefined
@@ -71,32 +69,28 @@ app.put("/accounts/:id", (req: Request, res: Response) => {
         const newBalance = req.body.balance as number | undefined
         const newType = req.body.type as ACCOUNT_TYPE | undefined
 
-<<<<<<< HEAD
-    const account = accounts.find((account) => account.id === id)
-=======
+        //const account = accounts.find((account) => account.id === id)
+
         if (typeof newId !== "string") {
-			throw new Error("'Id' deve ser uma string")
-		}
->>>>>>> 6fe73b42bb580418897653d68331f7ab596106fd
+            throw new Error("'Id' deve ser uma string")
+        }
 
         if (typeof newOwnerName !== "string") {
-			throw new Error("'Name' deve ser uma string")
-		}
+            throw new Error("'Name' deve ser uma string")
+        }
 
-<<<<<<< HEAD
         //account.balance = isNaN(newBalance) ? account.balance : newBalance
-    }
-=======
+
         if (typeof newBalance !== "number") {
-			throw new Error("'Balance' deve ser um number")
-		}
->>>>>>> 6fe73b42bb580418897653d68331f7ab596106fd
+            throw new Error("'Balance' deve ser um number")
+        }
+
 
         if (typeof newType !== "string") { // Em dúvida com o que comparar"
-			throw new Error("'Type' deve ser 'Ouro', 'Platina' ou 'Black'")
-		}
+            throw new Error("'Type' deve ser 'Ouro', 'Platina' ou 'Black'")
+        }
 
-        const account = accounts.find((account) => account.id === id) 
+        const account = accounts.find((account) => account.id === id)
 
         if (account) {
             account.id = newId || account.id
@@ -108,8 +102,8 @@ app.put("/accounts/:id", (req: Request, res: Response) => {
 
         res.status(200).send("Atualização realizada com sucesso")
 
-    }catch(error: any){
+    } catch (error: any) {
         console.log(error)
         res.status(400).send(error.message)
-    }   
+    }
 })
